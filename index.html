@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M&L Hampers - Curated Gift Hampers for Every Occasion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .font-playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1549465228-348f9fecc7a1?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-3xl font-playfair font-bold text-amber-800">M&L Hampers</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-600 hover:text-amber-800 transition duration-300">Home</a>
+                <a href="#hampers" class="text-gray-600 hover:text-amber-800 transition duration-300">Hampers</a>
+                <a href="#contact" class="text-gray-600 hover:text-amber-800 transition duration-300">Contact</a>
+                <a href="#about" class="text-gray-600 hover:text-amber-800 transition duration-300">About Us</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-amber-800 focus:outline-none">
+                <i class="fas fa-bars fa-lg"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#home" class="block py-2 text-gray-600 hover:text-amber-800">Home</a>
+            <a href="#hampers" class="block py-2 text-gray-600 hover:text-amber-800">Hampers</a>
+            <a href="#contact" class="block py-2 text-gray-600 hover:text-amber-800">Contact</a>
+            <a href="#about" class="block py-2 text-gray-600 hover:text-amber-800">About Us</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg text-white h-[80vh] flex items-center">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-4xl md:text-7xl font-playfair font-bold mb-4 leading-tight">Gifting, Reimagined.</h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8">Discover beautifully curated hampers that tell a story and create lasting memories.</p>
+            <a href="#hampers" class="bg-amber-700 hover:bg-amber-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 text-lg">Explore Our Collections</a>
+        </div>
+    </section>
+
+    <!-- Hampers Showcase -->
+    <section id="hampers" class="py-20 bg-stone-50">
+        <div class="container mx-auto px-6">
+            <!-- This container shows the main collection banners -->
+            <div id="collections-container">
+                <h2 class="text-4xl font-playfair text-center font-bold text-amber-800 mb-12">Our Collections</h2>
+                <div id="collection-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Collection Banners will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <!-- This container is hidden by default and shows products of a selected collection -->
+            <div id="products-container" class="hidden">
+                <div class="flex justify-between items-center mb-12 flex-wrap gap-4">
+                     <button id="back-to-collections" class="text-amber-800 hover:text-amber-600 font-semibold order-1">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Collections
+                    </button>
+                    <h2 id="product-collection-title" class="text-4xl font-playfair text-center font-bold text-amber-800 order-2 flex-grow"></h2>
+                    <div class="w-24 order-3"></div> <!-- Spacer -->
+                </div>
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    <!-- Products will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-playfair text-center font-bold text-amber-800 mb-12">Get In Touch</h2>
+            <div class="flex flex-col md:flex-row gap-12">
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-playfair font-bold mb-4">Contact Details</h3>
+                    <p class="text-lg mb-6">We'd love to hear from you! For custom orders, inquiries, or collaborations, please reach out.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-amber-700 w-6"></i>
+                            <a href="tel:8948581236" class="ml-3 text-lg hover:text-amber-800">8948581236</a>, <a href="tel:9696066486" class="ml-1 text-lg hover:text-amber-800">9696066486</a>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-amber-700 w-6"></i>
+                            <a href="mailto:misbahhasan71@yahoo.com" class="ml-3 text-lg hover:text-amber-800">misbahhasan71@yahoo.com</a>
+                        </div>
+                         <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-amber-700 w-6"></i>
+                            <p class="ml-3 text-lg">Fatehpur, Uttar Pradesh, India</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2">
+                     <h3 class="text-2xl font-playfair font-bold mb-4">Send us a Message</h3>
+                    <form action="#" method="POST" id="contactForm">
+                        <div class="mb-4">
+                            <input type="text" placeholder="Your Name" class="w-full px-4 py-3 rounded-lg bg-stone-100 focus:outline-none focus:ring-2 focus:ring-amber-700" required>
+                        </div>
+                        <div class="mb-4">
+                            <input type="email" placeholder="Your Email" class="w-full px-4 py-3 rounded-lg bg-stone-100 focus:outline-none focus:ring-2 focus:ring-amber-700" required>
+                        </div>
+                        <div class="mb-4">
+                            <textarea placeholder="Your Message" rows="5" class="w-full px-4 py-3 rounded-lg bg-stone-100 focus:outline-none focus:ring-2 focus:ring-amber-700" required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-3 px-8 rounded-full transition duration-300">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-playfair text-center font-bold text-amber-800 mb-12">Our Story</h2>
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 text-center md:text-left">
+                    <p class="text-lg mb-4">M&L Hampers was born from a shared passion for thoughtful gifting between our founders, <span class="font-bold">Misbah Hasan</span> and <span class="font-bold">Lubna Fatima</span>. We believe a gift is more than just an item; it's an expression of love, appreciation, and celebration.</p>
+                    <p class="text-lg">Our mission is to make every occasion special with meticulously curated hampers that delight the senses and warm the heart. From sourcing the finest products to elegant packaging, every detail is handled with care and a personal touch.</p>
+                </div>
+                <div class="md:w-1/2 grid grid-cols-2 gap-4">
+                    <div class="text-center">
+                        <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=2070&auto=format&fit=crop" alt="Founder Misbah Hasan" class="w-48 h-48 mx-auto rounded-full object-cover shadow-lg">
+                        <h3 class="mt-4 text-xl font-bold">Misbah Hasan</h3>
+                        <p class="text-gray-500">Founder</p>
+                    </div>
+                    <div class="text-center">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop" alt="Co-Founder Lubna Fatima" class="w-48 h-48 mx-auto rounded-full object-cover shadow-lg">
+                        <h3 class="mt-4 text-xl font-bold">Lubna Fatima</h3>
+                        <p class="text-gray-500">Co-Founder</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 M&L Hampers. All Rights Reserved.</p>
+            <p class="mt-2">Designed with <i class="fas fa-heart text-red-500"></i></p>
+            <div class="mt-4">
+                <a href="#" id="adminLoginLink" class="text-sm text-gray-400 hover:text-white">Admin Access</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm">
+            <h2 class="text-2xl font-bold mb-4 text-center">Admin Login</h2>
+            <form id="adminLoginForm">
+                <div class="mb-4">
+                    <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" id="username" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" required>
+                </div>
+                 <div id="login-error" class="text-red-500 text-sm mb-4 hidden"></div>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Sign In</button>
+                    <button type="button" id="closeModal" class="ml-4 text-gray-500 hover:text-gray-800">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="fixed inset-0 bg-gray-100 z-50 p-4 md:p-8 hidden overflow-y-auto">
+        <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-xl p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-amber-800">Admin Dashboard</h2>
+                <button id="logoutButton" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md">Logout</button>
+            </div>
+            
+            <!-- Add Product Section -->
+            <div class="bg-stone-50 p-6 rounded-lg mt-8 border-t-4 border-amber-700">
+                <h3 class="font-bold text-2xl mb-4 text-gray-800">Add Product</h3>
+                 <div id="product-success-message" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <strong class="font-bold">Success!</strong>
+                    <span class="block sm:inline">New product added and saved.</span>
+                </div>
+                <form id="addProductForm">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                        <div>
+                             <label for="productCollection" class="block text-sm font-medium text-gray-700">Collection</label>
+                            <select id="productCollection" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" required></select>
+                        </div>
+                        <div>
+                            <label for="productName" class="block text-sm font-medium text-gray-700">Product Name</label>
+                            <input type="text" id="productName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" required>
+                        </div>
+                         <div>
+                            <label for="productPrice" class="block text-sm font-medium text-gray-700">Price (e.g., ₹1,499)</label>
+                            <input type="text" id="productPrice" placeholder="e.g., ₹1,499" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" required>
+                        </div>
+                        <div>
+                            <label for="productImage" class="block text-sm font-medium text-gray-700">Product Image</label>
+                            <input type="file" id="productImage" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-amber-100 file:text-amber-800 hover:file:bg-amber-200" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-4 w-full md:w-auto bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-6 rounded-md">Add Product</button>
+                </form>
+            </div>
+            
+             <!-- Banner Management Section -->
+            <div class="bg-stone-50 p-6 rounded-lg mt-8 border-t-4 border-amber-700">
+                <h3 class="font-bold text-2xl mb-4 text-gray-800">Manage Collection Banners</h3>
+                 <div id="banner-success-message" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <strong class="font-bold">Success!</strong>
+                    <span class="block sm:inline">Banner image updated and saved.</span>
+                </div>
+                <form id="updateBannerForm">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        <div class="md:col-span-1">
+                             <label for="bannerCollectionSelect" class="block text-sm font-medium text-gray-700">Choose Collection</label>
+                            <select id="bannerCollectionSelect" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" required></select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="collectionBannerImage" class="block text-sm font-medium text-gray-700">New Banner Image</label>
+                            <input type="file" id="collectionBannerImage" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-amber-100 file:text-amber-800 hover:file:bg-amber-200" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-4 w-full md:w-auto bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-6 rounded-md">Update Banner</button>
+                </form>
+            </div>
+
+            <!-- Remove Product Section -->
+            <div class="bg-stone-50 p-6 rounded-lg mt-8 border-t-4 border-red-700">
+                <h3 class="font-bold text-2xl mb-4 text-gray-800">Remove Product</h3>
+                <div id="remove-product-success-message" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                    <strong class="font-bold">Success!</strong>
+                    <span class="block sm:inline">Product has been removed.</span>
+                </div>
+                <form id="removeProductForm">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
+                        <div>
+                            <label for="removeProductCollectionSelect" class="block text-sm font-medium text-gray-700">Collection</label>
+                            <select id="removeProductCollectionSelect" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" required></select>
+                        </div>
+                        <div class="md:col-span-2">
+                             <div>
+                                <label for="searchProductToRemove" class="block text-sm font-medium text-gray-700">Search Product Name</label>
+                                <input type="text" id="searchProductToRemove" placeholder="Type to search..." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500">
+                            </div>
+                            <div class="mt-4">
+                                <label for="productToRemoveSelect" class="block text-sm font-medium text-gray-700">Product to Remove</label>
+                                <select id="productToRemoveSelect" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" required></select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-4 w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-md">Remove Product</button>
+                </form>
+            </div>
+            
+            <!-- Reset Data Section -->
+            <div class="bg-stone-50 p-6 rounded-lg mt-8 border-t-4 border-gray-700">
+                <h3 class="font-bold text-2xl mb-4 text-gray-800">Reset Website Data</h3>
+                <p class="text-sm text-gray-600 mb-4">This will remove all your saved products and custom banners, restoring the website to its original state. This action cannot be undone.</p>
+                <button id="resetDataButton" class="w-full md:w-auto bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-6 rounded-md">Reset to Defaults</button>
+            </div>
+
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl text-center">
+            <i class="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
+            <h2 class="text-2xl font-bold mb-2">Message Sent!</h2>
+            <p>Thank you for reaching out. We'll get back to you soon.</p>
+            <button id="closeSuccessModal" class="mt-6 bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-6 rounded-md">OK</button>
+        </div>
+    </div>
+
+    <div id="resetConfirmModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl text-center w-full max-w-md">
+            <i class="fas fa-exclamation-triangle text-5xl text-red-500 mb-4"></i>
+            <h2 class="text-2xl font-bold mb-2">Are you sure?</h2>
+            <p class="text-gray-600">This will permanently delete all saved products and custom banners, restoring the original content.</p>
+            <div class="mt-6 flex justify-center gap-4">
+                 <button id="cancelReset" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-6 rounded-md">Cancel</button>
+                <button id="confirmReset" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-md">Yes, Reset Data</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // --- Contact Form ---
+            const contactForm = document.getElementById('contactForm');
+            const successModal = document.getElementById('successModal');
+            const closeSuccessModal = document.getElementById('closeSuccessModal');
+            
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                successModal.classList.remove('hidden');
+                contactForm.reset();
+            });
+
+            closeSuccessModal.addEventListener('click', () => {
+                successModal.classList.add('hidden');
+            });
+
+            // --- Product Data and Rendering ---
+            const defaultCollectionsData = {
+                "For Him": {
+                    bannerImage: "https://images.unsplash.com/photo-1571395434521-5cc1c14f7759?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEyfHxnaWZ0JTIwZm9yJTIwbWVufGVufDB8fHx8MTY3ODg5ODg4NA&ixlib=rb-4.0.3&q=80&w=600",
+                    products: [
+                        { name: "The Executive", price: "₹2,499", imageUrl: "https://images.unsplash.com/photo-1617192237372-9a72d7336ce0?q=80&w=1887&auto=format&fit=crop" },
+                        { name: "Gourmet Gentleman", price: "₹2,699", imageUrl: "https://images.unsplash.com/photo-1559819423-7a7ce35359df?q=80&w=1887&auto=format&fit=crop" },
+                        { name: "Adventure Kit", price: "₹2,199", imageUrl: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=2070&auto=format&fit=crop" },
+                    ]
+                },
+                 "For Her": {
+                    bannerImage: "https://images.unsplash.com/photo-1594035934090-09c313de1194?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDV8fHNwYSUyMGdpZnQlMjBzZXR8ZW58MHx8fHwxNjc4ODk4OTI1&ixlibrb-4.0.3&q=80&w=600",
+                    products: [
+                        { name: "Spa Day Retreat", price: "₹2,999", imageUrl: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" },
+                        { name: "The Glamour Box", price: "₹3,499", imageUrl: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=2080&auto=format&fit=crop" },
+                        { name: "Sweet Serenity", price: "₹2,799", imageUrl: "https://images.unsplash.com/photo-1620052298288-c4a45a3a25b8?q=80&w=1887&auto=format&fit=crop" },
+                    ]
+                },
+                "For Kids": {
+                    bannerImage: "https://images.unsplash.com/photo-1566576912317-15635208114f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEwfHxraWRzJTIwZ2lmdCUyMGJhc2tldHxlbnwwfHx8fDE2Nzg4OTg5NjY&ixlib=rb-4.0.3&q=80&w=600",
+                    products: [
+                        { name: "Creative Explorer", price: "₹1,999", imageUrl: "https://images.unsplash.com/photo-1516627145408-4d538a7c206a?q=80&w=2070&auto=format&fit=crop" },
+                        { name: "Candy Kingdom", price: "₹1,499", imageUrl: "https://images.unsplash.com/photo-1600719828790-a52da69866e4?q=80&w=1887&auto=format&fit=crop" },
+                        { name: "Toy Trove", price: "₹2,299", imageUrl: "https://images.unsplash.com/photo-1560859252-e1644e590210?q=80&w=1964&auto=format&fit=crop" },
+                    ]
+                },
+                 "Weddings": {
+                    bannerImage: "https://images.unsplash.com/photo-1526301828286-9856f68903a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEzfHx3ZWRkaW5nJTIwZ2lmdHxlbnwwfHx8fDE2Nzg4OTkwMDQ&ixlib.rb-4.0.3&q=80&w=600",
+                    products: [
+                        { name: "To The Happy Couple", price: "₹4,999", imageUrl: "https://images.unsplash.com/photo-1607994695034-7a7615039281?q=80&w=1887&auto=format&fit=crop" },
+                        { name: "Celebration Basket", price: "₹5,999", imageUrl: "https://images.unsplash.com/photo-1594951445585-80f073b22b51?q=80&w=1887&auto=format&fit=crop" },
+                        { name: "Mr. & Mrs. Essentials", price: "₹4,499", imageUrl: "https://images.unsplash.com/photo-1556911073-52527ac402b6?q=80&w=2070&auto=format&fit=crop" },
+                    ]
+                },
+                 "Engagements": {
+                    bannerImage: "https://images.unsplash.com/photo-1612178532859-2c9c7b9a5c8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDR8fHJvbWFudGljJTIwZ2lmdHxlbnwwfHx8fDE2Nzg4OTkwMzg&ixlib.rb-4.0.3&q=80&w=600",
+                    products: [
+                        { name: "The Proposal", price: "₹3,999", imageUrl: "https://images.unsplash.com/photo-1598214886343-059032734608?q=80&w=1935&auto=format&fit=crop" },
+                        { name: "Future Mrs.", price: "₹3,499", imageUrl: "https://images.unsplash.com/photo-1620789218698-b6a67a07a53e?q=80&w=1887&auto=format&fit=crop" },
+                        { name: "Love Story Starter", price: "₹3,199", imageUrl: "https://images.unsplash.com/photo-1531701553543-a3d8a77a3433?q=80&w=1887&auto=format&fit=crop" },
+                    ]
+                },
+                "All Occasions": {
+                    bannerImage: "https://images.unsplash.com/photo-1566081024363-3882a836ca4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEwfHxnaWZ0JTIwaGFtcGVyfGVufDB8fHx8MTY3ODg5OTA2NQ&ixlib.rb-4.0.3&q=80&w=600",
+                    products: [
+                        { name: "Classic Celebration", price: "₹2,199", imageUrl: "https://images.unsplash.com/photo-1602491595018-b0a23dc86968?q=80&w=1887&auto=format&fit=crop" },
+                        { name: "Thank You Kindly", price: "₹1,899", imageUrl: "https://images.unsplash.com/photo-1593101982592-54c38221655e?q=80&w=1887&auto=format&fit=crop" },
+                        { name: "Birthday Surprise", price: "₹2,499", imageUrl: "https://images.unsplash.com/photo-1576836165620-a8328f526017?q=80&w=1964&auto=format&fit=crop" },
+                    ]
+                },
+                "Candles": {
+                    bannerImage: "https://images.unsplash.com/photo-1594212699903-ec8a64e1f9ee?q=80&w=1887&auto=format&fit=crop",
+                    products: [
+                        { name: "Serene Lavender", price: "₹1,299", imageUrl: "https://images.unsplash.com/photo-1600857544256-6254420655ec?q=80&w=1887&auto=format&fit=crop" },
+                        { name: "Vanilla Bean Dream", price: "₹1,199", imageUrl: "https://images.unsplash.com/photo-1614294237583-1459a688d0b2?q=80&w=1887&auto=format&fit=crop" },
+                        { name: "Sandalwood Musk", price: "₹1,499", imageUrl: "https://images.unsplash.com/photo-1617805232938-00278f24025d?q=80&w=1887&auto=format&fit=crop" },
+                    ]
+                }
+            };
+            
+            let collectionsData;
+
+            function loadData() {
+                const savedData = localStorage.getItem('mlHampersData');
+                try {
+                     if (savedData) {
+                        collectionsData = JSON.parse(savedData);
+                    } else {
+                        collectionsData = JSON.parse(JSON.stringify(defaultCollectionsData)); 
+                    }
+                } catch(e) {
+                     collectionsData = JSON.parse(JSON.stringify(defaultCollectionsData));
+                }
+            }
+
+            function saveData() {
+                localStorage.setItem('mlHampersData', JSON.stringify(collectionsData));
+            }
+
+            const collectionsContainer = document.getElementById('collections-container');
+            const productsContainer = document.getElementById('products-container');
+            const collectionGrid = document.getElementById('collection-grid');
+            const productGrid = document.getElementById('product-grid');
+            const backToCollectionsBtn = document.getElementById('back-to-collections');
+            const productCollectionTitle = document.getElementById('product-collection-title');
+
+            function renderCollectionBanners() {
+                collectionGrid.innerHTML = '';
+                for (const collectionName in collectionsData) {
+                    const collection = collectionsData[collectionName];
+                    const bannerCard = `
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover-effect cursor-pointer" data-collection="${collectionName}">
+                            <div class="relative">
+                                <img src="${collection.bannerImage}" alt="${collectionName}" class="w-full h-80 object-cover">
+                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                    <h3 class="text-3xl font-playfair font-bold text-white text-center">${collectionName}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    collectionGrid.innerHTML += bannerCard;
+                }
+                
+                document.querySelectorAll('#collection-grid .card-hover-effect').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const collectionName = card.dataset.collection;
+                        renderProductsForCollection(collectionName);
+                        collectionsContainer.classList.add('hidden');
+                        productsContainer.classList.remove('hidden');
+                        window.scrollTo({ top: productsContainer.offsetTop - 100, behavior: 'smooth' });
+                    });
+                });
+            }
+
+            function renderProductsForCollection(collectionName) {
+                productCollectionTitle.textContent = collectionName;
+                productGrid.innerHTML = '';
+                const products = collectionsData[collectionName].products;
+
+                if (!products || products.length === 0) {
+                    productGrid.innerHTML = `<p class="text-center text-gray-500 col-span-full">No products in this collection yet.</p>`;
+                    return;
+                }
+
+                products.forEach(product => {
+                    const whatsappNumber = '918948581236';
+                    const message = encodeURIComponent(`Hello M&L Hampers, I'm interested in the "${product.name}" hamper from the ${collectionName} collection.`);
+                    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+                    const productCard = `
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover-effect flex flex-col">
+                            <img src="${product.imageUrl}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/a87c5b/ffffff?text=Image+Not+Found';">
+                            <div class="p-6 flex-grow">
+                                <h3 class="text-2xl font-playfair font-bold mb-2">${product.name}</h3>
+                                <p class="text-xl font-semibold text-amber-800 mb-4">${product.price}</p>
+                            </div>
+                             <div class="p-4 bg-gray-50 text-center">
+                                <a href="${whatsappLink}" target="_blank" class="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">
+                                    <i class="fab fa-whatsapp mr-2"></i> Inquire Now
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    productGrid.innerHTML += productCard;
+                });
+            }
+
+            backToCollectionsBtn.addEventListener('click', () => {
+                productsContainer.classList.add('hidden');
+                collectionsContainer.classList.remove('hidden');
+            });
+
+
+            // --- Admin Panel Logic ---
+            const adminLoginLink = document.getElementById('adminLoginLink');
+            const adminModal = document.getElementById('adminModal');
+            const closeModal = document.getElementById('closeModal');
+            const adminLoginForm = document.getElementById('adminLoginForm');
+            const adminPanel = document.getElementById('adminPanel');
+            const logoutButton = document.getElementById('logoutButton');
+            const loginError = document.getElementById('login-error');
+            const addProductForm = document.getElementById('addProductForm');
+            const productSuccessMessage = document.getElementById('product-success-message');
+            const productCollectionSelect = document.getElementById('productCollection');
+            const updateBannerForm = document.getElementById('updateBannerForm');
+            const bannerCollectionSelect = document.getElementById('bannerCollectionSelect');
+            const bannerSuccessMessage = document.getElementById('banner-success-message');
+            const removeProductForm = document.getElementById('removeProductForm');
+            const removeProductCollectionSelect = document.getElementById('removeProductCollectionSelect');
+            const productToRemoveSelect = document.getElementById('productToRemoveSelect');
+            const removeProductSuccessMessage = document.getElementById('remove-product-success-message');
+            const searchProductToRemoveInput = document.getElementById('searchProductToRemove');
+            const resetDataButton = document.getElementById('resetDataButton');
+            const resetConfirmModal = document.getElementById('resetConfirmModal');
+            const cancelReset = document.getElementById('cancelReset');
+            const confirmReset = document.getElementById('confirmReset');
+
+            function populateProductsToRemoveSelect(collectionName, searchTerm = '') {
+                productToRemoveSelect.innerHTML = '';
+                const products = collectionsData[collectionName].products;
+                if (!products || products.length === 0) {
+                    const option = document.createElement('option');
+                    option.textContent = "No products in this collection";
+                    option.disabled = true;
+                    productToRemoveSelect.appendChild(option);
+                    return;
+                }
+
+                const lowerCaseSearchTerm = searchTerm.toLowerCase();
+
+                const filteredProducts = products
+                    .map((product, index) => ({ ...product, originalIndex: index })) // Keep original index
+                    .filter(product => product.name.toLowerCase().includes(lowerCaseSearchTerm));
+
+                if (filteredProducts.length === 0) {
+                     const option = document.createElement('option');
+                    option.textContent = "No matching products found";
+                    option.disabled = true;
+                    productToRemoveSelect.appendChild(option);
+                    return;
+                }
+
+                filteredProducts.forEach(product => {
+                    const option = document.createElement('option');
+                    option.value = product.originalIndex; // Use original index for removal
+                    option.textContent = product.name;
+                    productToRemoveSelect.appendChild(option);
+                });
+            }
+            
+            function populateCollectionSelects() {
+                productCollectionSelect.innerHTML = '';
+                bannerCollectionSelect.innerHTML = '';
+                removeProductCollectionSelect.innerHTML = '';
+                 for (const collectionName in collectionsData) {
+                    const option1 = document.createElement('option');
+                    option1.value = collectionName;
+                    option1.textContent = collectionName;
+                    productCollectionSelect.appendChild(option1.cloneNode(true));
+                    bannerCollectionSelect.appendChild(option1.cloneNode(true));
+                    removeProductCollectionSelect.appendChild(option1.cloneNode(true));
+                }
+            }
+
+
+            adminLoginLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                adminModal.classList.remove('hidden');
+            });
+
+            closeModal.addEventListener('click', () => {
+                adminModal.classList.add('hidden');
+                loginError.classList.add('hidden');
+                adminLoginForm.reset();
+            });
+            
+            adminModal.addEventListener('click', (e) => {
+                if (e.target === adminModal) {
+                    adminModal.classList.add('hidden');
+                    loginError.classList.add('hidden');
+                    adminLoginForm.reset();
+                }
+            });
+
+            adminLoginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+
+                if (username === '95583550' && password === 'Misbah&hamper#ML') {
+                    adminModal.classList.add('hidden');
+                    adminPanel.classList.remove('hidden');
+                    adminLoginForm.reset();
+                    loginError.classList.add('hidden');
+                    populateCollectionSelects();
+                    const firstCollection = Object.keys(collectionsData)[0];
+                    if(firstCollection) {
+                        populateProductsToRemoveSelect(firstCollection);
+                    }
+                } else {
+                    loginError.textContent = 'Invalid username or password.';
+                    loginError.classList.remove('hidden');
+                }
+            });
+            
+            addProductForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const collectionName = productCollectionSelect.value;
+                const productName = document.getElementById('productName').value;
+                const productPrice = document.getElementById('productPrice').value;
+                const productImageFile = document.getElementById('productImage').files[0];
+
+                if (collectionsData[collectionName] && productName && productPrice && productImageFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const newProduct = {
+                            name: productName,
+                            price: productPrice,
+                            imageUrl: event.target.result
+                        };
+                        collectionsData[collectionName].products.push(newProduct);
+                        saveData();
+                        
+                        if (!productsContainer.classList.contains('hidden') && productCollectionTitle.textContent === collectionName) {
+                            renderProductsForCollection(collectionName);
+                        }
+                        
+                        populateProductsToRemoveSelect(removeProductCollectionSelect.value);
+
+                        addProductForm.reset();
+                        productSuccessMessage.classList.remove('hidden');
+                        setTimeout(() => productSuccessMessage.classList.add('hidden'), 4000);
+                    };
+                    reader.readAsDataURL(productImageFile);
+                }
+            });
+            
+            updateBannerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const collectionName = bannerCollectionSelect.value;
+                const bannerImageFile = document.getElementById('collectionBannerImage').files[0];
+
+                if (collectionsData[collectionName] && bannerImageFile) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        collectionsData[collectionName].bannerImage = event.target.result;
+                        saveData();
+                        renderCollectionBanners();
+                        updateBannerForm.reset();
+                        bannerSuccessMessage.classList.remove('hidden');
+                        setTimeout(() => bannerSuccessMessage.classList.add('hidden'), 4000);
+                    };
+                    reader.readAsDataURL(bannerImageFile);
+                }
+            });
+
+            removeProductCollectionSelect.addEventListener('change', (e) => {
+                searchProductToRemoveInput.value = ''; // Reset search field
+                populateProductsToRemoveSelect(e.target.value);
+            });
+
+            searchProductToRemoveInput.addEventListener('input', () => {
+                const collectionName = removeProductCollectionSelect.value;
+                populateProductsToRemoveSelect(collectionName, searchProductToRemoveInput.value);
+            });
+
+            removeProductForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const collectionName = removeProductCollectionSelect.value;
+                const productIndexToRemove = productToRemoveSelect.value;
+
+                if (collectionName && productIndexToRemove !== null && collectionsData[collectionName].products[productIndexToRemove]) {
+                    collectionsData[collectionName].products.splice(productIndexToRemove, 1);
+                    saveData();
+                    
+                    if (!productsContainer.classList.contains('hidden') && productCollectionTitle.textContent === collectionName) {
+                        renderProductsForCollection(collectionName);
+                    }
+
+                    searchProductToRemoveInput.value = ''; // Reset search field after removal
+                    populateProductsToRemoveSelect(collectionName);
+
+                    removeProductSuccessMessage.classList.remove('hidden');
+                    setTimeout(() => removeProductSuccessMessage.classList.add('hidden'), 4000);
+                }
+            });
+
+            resetDataButton.addEventListener('click', () => {
+                resetConfirmModal.classList.remove('hidden');
+            });
+            cancelReset.addEventListener('click', () => {
+                resetConfirmModal.classList.add('hidden');
+            });
+             confirmReset.addEventListener('click', () => {
+                localStorage.removeItem('mlHampersData');
+                window.location.reload();
+            });
+
+            logoutButton.addEventListener('click', () => {
+                adminPanel.classList.add('hidden');
+            });
+            
+            // --- Smooth Scrolling ---
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                     if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Initial load
+            loadData();
+            renderCollectionBanners();
+        });
+    </script>
+
+</body>
+</html>
+

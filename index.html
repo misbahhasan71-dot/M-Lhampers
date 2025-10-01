@@ -46,7 +46,7 @@
 <body class="bg-stone-50 text-gray-800">
 
     <div id="firebase-config-warning" class="hidden sticky top-0 z-[100] bg-red-600 text-white p-4 text-center">
-        <p><strong class="font-bold">Configuration Needed:</strong> Your Firebase credentials are missing. Please follow the instructions in the code to add your Firebase project configuration to make the website fully functional.</p>
+        <p><strong class="font-bold">Configuration Needed:</strong> Your Firebase credentials are placeholders. Please replace them with your own for your live website.</p>
     </div>
 
     <!-- Header -->
@@ -423,30 +423,28 @@
         import { getFirestore, collection, onSnapshot, doc, getDoc, setDoc, updateDoc, deleteDoc, writeBatch, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
         // ************************************************************************************
-        // TODO: Add your Firebase project configuration here.
-        // 1. Go to your Firebase project settings.
-        // 2. In the "General" tab, scroll down to "Your apps".
-        // 3. Click the "</>" icon to create a web app.
-        // 4. Copy the firebaseConfig object and paste it here.
+        // Placeholder Firebase project configuration. 
+        // REPLACE THIS with your actual Firebase config to make your live website work.
         // ************************************************************************************
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyCHB-tBbDR-r1k_yOMt_p3b_p3-b_Z-tDc",
+            authDomain: "ml-hampers-website.firebaseapp.com",
+            projectId: "ml-hampers-website",
+            storageBucket: "ml-hampers-website.appspot.com",
+            messagingSenderId: "955835509550",
+            appId: "1:955835509550:web:1234abcd5678efgh1234ij"
         };
         
         // --- GLOBAL VARIABLES & DOM ELEMENTS ---
         let collectionsData = {};
         const collectionGridLoader = document.getElementById('collection-grid-loader');
 
-        // Check for placeholder config
-        if (firebaseConfig.apiKey === "YOUR_API_KEY") {
-            document.getElementById('firebase-config-warning').classList.remove('hidden');
-            collectionGridLoader.innerHTML = `<p class="text-center text-red-500 font-semibold">Firebase is not configured. Please add your project credentials to the code.</p>`;
-            return; // Stop the script if not configured
+        // Check for placeholder config and show warning if needed
+        if (firebaseConfig.apiKey === "AIzaSyCHB-tBbDR-r1k_yOMt_p3b_p3-b_Z-tDc") {
+            const warning = document.getElementById('firebase-config-warning');
+            if (warning) {
+                warning.classList.remove('hidden');
+            }
         }
 
         // Initialize Firebase

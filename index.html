@@ -174,11 +174,130 @@
     <footer class="bg-gray-800 text-white py-10">
         <div class="container mx-auto px-6 text-center">
             <p>&copy; 2024 M&L Hampers. All Rights Reserved.</p>
-            <p class="mt-2">Designed with <i class="fas fa-heart text-red-500"></i></p>
+            <p class="mt-2">Designed with <button id="secretAdminLogin" class="bg-transparent border-none p-0"><i class="fas fa-heart text-red-500 hover:text-red-400 transition-colors"></i></button></p>
         </div>
     </footer>
 
-    <!-- Success Modal -->
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-sm">
+            <h2 class="text-2xl font-bold mb-4 text-center">Admin Login</h2>
+            <form id="adminLoginForm">
+                <div class="mb-4">
+                    <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+                    <input type="text" id="username" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500" required>
+                </div>
+                 <div id="login-error" class="text-red-500 text-sm mb-4 hidden"></div>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="w-full bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Sign In</button>
+                    <button type="button" id="closeModal" class="ml-4 text-gray-500 hover:text-gray-800">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="fixed inset-0 bg-gray-100 z-50 p-4 md:p-8 hidden overflow-y-auto">
+        <div class="max-w-6xl mx-auto bg-white rounded-lg shadow-xl p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-amber-800">Admin Dashboard</h2>
+                <div class="flex gap-4">
+                    <button id="viewMessagesBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md">View Messages</button>
+                    <button id="logoutButton" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-md">Logout</button>
+                </div>
+            </div>
+
+            <!-- Manage Hero Section -->
+             <div class="bg-stone-50 p-6 rounded-lg mt-6 border-t-4 border-purple-700">
+                <h3 class="font-bold text-2xl mb-4 text-gray-800">Manage Hero Content</h3>
+                <form id="manageHeroForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+                        <div>
+                            <label for="heroTitleInput" class="block text-sm font-medium text-gray-700">Main Title</label>
+                            <input type="text" id="heroTitleInput" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                            
+                            <label for="heroSubtitleInput" class="block text-sm font-medium text-gray-700 mt-4">Subtitle</label>
+                            <textarea id="heroSubtitleInput" rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"></textarea>
+                            
+                            <label for="heroButtonInput" class="block text-sm font-medium text-gray-700 mt-4">Button Text</label>
+                            <input type="text" id="heroButtonInput" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Background Image URL</label>
+                            <input type="text" id="heroImageInput" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                            <img id="heroImagePreview" src="" class="mt-2 w-full h-32 object-cover rounded-md border bg-gray-200">
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-4 w-full md:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-md">Save Hero Changes</button>
+                </form>
+            </div>
+
+
+            <!-- Create Collection Section -->
+            <div class="bg-stone-50 p-6 rounded-lg mt-8 border-t-4 border-green-700">
+                <h3 class="font-bold text-2xl mb-4 text-gray-800">Create New Collection</h3>
+                <form id="createCollectionForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
+                        <div>
+                            <label for="newCollectionName" class="block text-sm font-medium text-gray-700">Collection Name</label>
+                            <input type="text" id="newCollectionName" placeholder="e.g., Corporate Gifts" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required>
+                        </div>
+                        <div>
+                            <label for="newCollectionBannerImage" class="block text-sm font-medium text-gray-700">Banner Image URL</label>
+                            <input type="text" id="newCollectionBannerImage" placeholder="https://..." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-4 w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-md">Create Collection</button>
+                </form>
+            </div>
+            
+            <!-- Add Product Section -->
+            <div class="bg-stone-50 p-6 rounded-lg mt-8 border-t-4 border-amber-700">
+                <h3 class="font-bold text-2xl mb-4 text-gray-800">Add Product</h3>
+                <form id="addProductForm">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
+                        <div>
+                             <label for="productCollection" class="block text-sm font-medium text-gray-700">Collection</label>
+                            <select id="productCollection" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required></select>
+                        </div>
+                        <div>
+                            <label for="productName" class="block text-sm font-medium text-gray-700">Product Name</label>
+                            <input type="text" id="productName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required>
+                        </div>
+                         <div>
+                            <label for="productPrice" class="block text-sm font-medium text-gray-700">Price</label>
+                            <input type="text" id="productPrice" placeholder="e.g., ₹1,499" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required>
+                        </div>
+                        <div>
+                            <label for="productImage" class="block text-sm font-medium text-gray-700">Product Image URL</label>
+                             <input type="text" id="productImage" placeholder="https://..." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-4 w-full md:w-auto bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-6 rounded-md">Add Product</button>
+                </form>
+            </div>
+
+            <!-- Manage Products Section -->
+            <div class="bg-stone-50 p-6 rounded-lg mt-8 border-t-4 border-blue-700">
+                <h3 class="font-bold text-2xl mb-4 text-gray-800">Manage Products</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end mb-4">
+                    <div>
+                        <label for="manageCollectionSelect" class="block text-sm font-medium text-gray-700">Collection</label>
+                        <select id="manageCollectionSelect" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"></select>
+                    </div>
+                </div>
+                <div id="productListContainer" class="mt-4 max-h-96 overflow-y-auto">
+                    <!-- Products to manage will be listed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
     <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
         <div class="bg-white p-8 rounded-lg shadow-xl text-center">
             <i class="fas fa-check-circle text-5xl text-green-500 mb-4"></i>
@@ -188,125 +307,52 @@
         </div>
     </div>
     
+    <!-- Edit Product Modal -->
+    <div id="editProductModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60] hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-lg">
+            <h2 class="text-2xl font-bold mb-6 text-center">Edit Product</h2>
+            <form id="editProductForm">
+                <input type="hidden" id="editProductCollectionName">
+                <input type="hidden" id="editProductIndex">
+                
+                <div class="mb-4">
+                    <label for="editProductName" class="block text-sm font-medium text-gray-700">Product Name</label>
+                    <input type="text" id="editProductName" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="editProductPrice" class="block text-sm font-medium text-gray-700">Price</label>
+                    <input type="text" id="editProductPrice" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required>
+                </div>
+
+                <div class="mb-6">
+                    <label for="editProductImageUrl" class="block text-sm font-medium text-gray-700">Product Image URL</label>
+                    <input type="text" id="editProductImageUrl" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm" required>
+                </div>
+
+                <div class="flex items-center justify-end gap-4">
+                    <button type="button" id="closeEditModal" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-md">Cancel</button>
+                    <button type="submit" class="bg-amber-700 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-md">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Messages Modal -->
+    <div id="messagesModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[60] hidden">
+        <div class="bg-white p-8 rounded-lg shadow-xl w-full max-w-3xl h-[80vh] flex flex-col">
+            <div class="flex justify-between items-center mb-4 pb-4 border-b">
+                <h2 class="text-2xl font-bold">Contact Form Messages</h2>
+                <button id="closeMessagesModal" class="text-gray-500 hover:text-gray-800 text-2xl font-bold">&times;</button>
+            </div>
+            <div id="messageListContainer" class="flex-grow overflow-y-auto space-y-4 pr-2">
+                <p class="text-center text-gray-500 p-4">Message viewing is disabled in this mode.</p>
+            </div>
+        </div>
+    </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- LOCAL DATA ---
-            const collectionsData = { "For Him": { bannerImage: "https://images.unsplash.com/photo-1571395434521-5cc1c14f7759?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEyfHxnaWZ0JTIwZm9yJTIwbWVufGVufDB8fHx8MTY3ODg5ODg4NA&ixlib=rb-4.0.3&q=80&w=600", products: [ { name: "The Executive", price: "₹2,499", imageUrl: "https://images.unsplash.com/photo-1617192237372-9a72d7336ce0?q=80&w=1887&auto=format&fit=crop" }, { name: "Gourmet Gentleman", price: "₹2,699", imageUrl: "https://images.unsplash.com/photo-1559819423-7a7ce35359df?q=80&w=1887&auto=format&fit=crop" }, { name: "Adventure Kit", price: "₹2,199", imageUrl: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=2070&auto=format&fit=crop" }, ] }, "For Her": { bannerImage: "https://images.unsplash.com/photo-1594035934090-09c313de1194?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDV8fHNwYSUyMGdpZnQlMjBzZXR8ZW58MHx8fHwxNjc4ODk4OTI1&ixlibrb-4.0.3&q=80&w=600", products: [ { name: "Spa Day Retreat", price: "₹2,999", imageUrl: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" }, { name: "The Glamour Box", price: "₹3,499", imageUrl: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=2080&auto=format&fit=crop" }, { name: "Sweet Serenity", price: "₹2,799", imageUrl: "https://images.unsplash.com/photo-1620052298288-c4a45a3a25b8?q=80&w=1887&auto=format&fit=crop" }, ] }, "For Kids": { bannerImage: "https://images.unsplash.com/photo-1566576912317-15635208114f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEwfHxraWRzJTIwZ2lmdCUyMGJhc2tldHxlbnwwfHx8fDE2Nzg4OTg5NjY&ixlib-rb-4.0.3&q=80&w=600", products: [ { name: "Creative Explorer", price: "₹1,999", imageUrl: "https://images.unsplash.com/photo-1516627145408-4d538a7c206a?q=80&w=2070&auto=format&fit=crop" }, { name: "Candy Kingdom", price: "₹1,499", imageUrl: "https://images.unsplash.com/photo-1600719828790-a52da69866e4?q=80&w=1887&auto=format&fit=crop" }, { name: "Toy Trove", price: "₹2,299", imageUrl: "https://images.unsplash.com/photo-1560859252-e1644e590210?q=80&w=1964&auto=format&fit=crop" }, ] }, "Weddings": { bannerImage: "https://images.unsplash.com/photo-1526301828286-9856f68903a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEzfHx3ZWRkaW5nJTIwZ2lmdHxlbnwwfHx8fDE2Nzg4OTkwMDQ&ixlib.rb-4.0.3&q=80&w=600", products: [ { name: "To The Happy Couple", price: "₹4,999", imageUrl: "https://images.unsplash.com/photo-1607994695034-7a7615039281?q=80&w=1887&auto=format&fit=crop" }, { name: "Celebration Basket", price: "₹5,999", imageUrl: "https://images.unsplash.com/photo-1594951445585-80f073b22b51?q=80&w=1887&auto=format&fit=crop" }, { name: "Mr. & Mrs. Essentials", price: "₹4,499", imageUrl: "https://images.unsplash.com/photo-1556911073-52527ac402b6?q=80&w=2070&auto=format&fit=crop" }, ] }, "Engagements": { bannerImage: "https://images.unsplash.com/photo-1612178532859-2c9c7b9a5c8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDR8fHJvbWFudGljJTIwZ2lmdHxlbnwwfHx8fDE2Nzg4OTkwMzg&ixlib.rb-4.0.3&q=80&w=600", products: [ { name: "The Proposal", price: "₹3,999", imageUrl: "https://images.unsplash.com/photo-1598214886343-059032734608?q=80&w=1935&auto=format&fit=crop" }, { name: "Future Mrs.", price: "₹3,499", imageUrl: "https://images.unsplash.com/photo-1620789218698-b6a67a07a53e?q=80&w=1887&auto=format&fit=crop" }, { name: "Love Story Starter", price: "₹3,199", imageUrl: "https://images.unsplash.com/photo-1531701553543-a3d8a77a3433?q=80&w=1887&auto=format&fit=crop" }, ] }, "All Occasions": { bannerImage: "https://images.unsplash.com/photo-1566081024363-3882a836ca4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEwfHxnaWZ0JTIwaGFtcGVyfGVufDB8fHx8MTY3ODg5OTA2NQ&ixlib.rb-4.0.3&q=80&w=600", products: [ { name: "Classic Celebration", price: "₹2,199", imageUrl: "https://images.unsplash.com/photo-1602491595018-b0a23dc86968?q=80&w=1887&auto=format&fit=crop" }, { name: "Thank You Kindly", price: "₹1,899", imageUrl: "https://images.unsplash.com/photo-1593101982592-54c38221655e?q=80&w=1887&auto=format&fit=crop" }, { name: "Birthday Surprise", price: "₹2,499", imageUrl: "https://images.unsplash.com/photo-1576836165620-a8328f526017?q=80&w=1964&auto=format&fit=crop" }, ] }, "Candles": { bannerImage: "https://images.unsplash.com/photo-1594212699903-ec8a64e1f9ee?q=80&w=1887&auto=format&fit=crop", products: [ { name: "Serene Lavender", price: "₹1,299", imageUrl: "https://images.unsplash.com/photo-1600857544256-6254420655ec?q=80&w=1887&auto=format&fit=crop" }, { name: "Vanilla Bean Dream", price: "₹1,199", imageUrl: "https://images.unsplash.com/photo-1614294237583-1459a688d0b2?q=80&w=1887&auto=format&fit=crop" }, { name: "Sandalwood Musk", price: "₹1,499", imageUrl: "https://images.unsplash.com/photo-1617805232938-00278f24025d?q=80&w=1887&auto=format&fit=crop" }, ] } };
-            const heroData = {
-                title: "Gifting, Reimagined.",
-                subtitle: "Discover beautifully curated hampers that tell a story and create lasting memories.",
-                buttonText: "Explore Our Collections",
-                backgroundImageUrl: "https://images.unsplash.com/photo-1604164372215-2a2245224716?q=80&w=2070&auto=format&fit=crop"
-            };
-
-            // --- DOM Elements ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const contactForm = document.getElementById('contactForm');
-            const successModal = document.getElementById('successModal');
-            const closeSuccessModal = document.getElementById('closeSuccessModal');
-            const collectionsContainer = document.getElementById('collections-container');
-            const productsContainer = document.getElementById('products-container');
-            const collectionGrid = document.getElementById('collection-grid');
-            const productGrid = document.getElementById('product-grid');
-            const backToCollectionsBtn = document.getElementById('back-to-collections');
-            const productCollectionTitle = document.getElementById('product-collection-title');
-
-            // --- UI Logic ---
-            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                successModal.classList.remove('hidden');
-                contactForm.reset();
-            });
-
-            closeSuccessModal.addEventListener('click', () => successModal.classList.add('hidden'));
-
-            backToCollectionsBtn.addEventListener('click', () => {
-                productsContainer.classList.add('hidden');
-                collectionsContainer.classList.remove('hidden');
-            });
-            
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-                     if (!mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden');
-                });
-            });
-
-            // --- Rendering Functions ---
-            function renderHero() {
-                document.getElementById('hero-title').textContent = heroData.title;
-                document.getElementById('hero-subtitle').textContent = heroData.subtitle;
-                document.getElementById('hero-button').textContent = heroData.buttonText;
-                document.getElementById('home').style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.1)), url('${heroData.backgroundImageUrl}')`;
-            }
-
-            function renderCollectionBanners() {
-                collectionGrid.innerHTML = '';
-                const sortedCollectionNames = Object.keys(collectionsData).sort();
-                for (const collectionName of sortedCollectionNames) {
-                    const collection = collectionsData[collectionName];
-                    const bannerCard = `
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover-effect cursor-pointer" data-collection="${collectionName}">
-                            <div class="relative">
-                                <img src="${collection.bannerImage}" alt="${collectionName}" class="w-full h-80 object-cover">
-                                <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                                    <h3 class="text-3xl font-playfair font-bold text-white text-center">${collectionName}</h3>
-                                </div>
-                            </div>
-                        </div>`;
-                    collectionGrid.innerHTML += bannerCard;
-                }
-                document.querySelectorAll('#collection-grid .card-hover-effect').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const collectionName = card.dataset.collection;
-                        renderProductsForCollection(collectionName);
-                        collectionsContainer.classList.add('hidden');
-                        productsContainer.classList.remove('hidden');
-                        window.scrollTo({ top: productsContainer.offsetTop - 100, behavior: 'smooth' });
-                    });
-                });
-            }
-
-            function renderProductsForCollection(collectionName) {
-                productCollectionTitle.textContent = collectionName;
-                productGrid.innerHTML = '';
-                const collection = collectionsData[collectionName];
-                const products = collection ? collection.products : [];
-
-                if (!products || products.length === 0) {
-                    productGrid.innerHTML = `<p class="text-center text-gray-500 col-span-full">No products in this collection yet.</p>`;
-                    return;
-                }
-                products.forEach(product => {
-                    const whatsappNumber = '918948581236';
-                    const message = encodeURIComponent(`Hello M&L Hampers, I'm interested in the "${product.name}" hamper from the ${collectionName} collection.`);
-                    const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
-                    const productCard = `
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover-effect flex flex-col">
-                            <img src="${product.imageUrl}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/a87c5b/ffffff?text=Image+Not+Found';">
-                            <div class="p-6 flex-grow">
-                                <h3 class="text-2xl font-playfair font-bold mb-2">${product.name}</h3>
-                                <p class="text-xl font-semibold text-amber-800 mb-4">${product.price}</p>
-                            </div>
-                             <div class="p-4 bg-gray-50 text-center">
-                                <a href="${whatsappLink}" target="_blank" class="inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">
-                                    <i class="fab fa-whatsapp mr-2"></i> Inquire Now
-                                </a>
-                            </div>
-                        </div>`;
-                    productGrid.innerHTML += productCard;
-                });
-            }
-
-            // --- Initial Load ---
-            renderHero();
-            renderCollectionBanners();
-        });
-    </script>
-</body>
-</html>
+            // --- LOCAL DATA (No Database) ---
+            const initialCollectionsData = { "For Him": { bannerImage: "https://images.unsplash.com/photo-1571395434521-5cc1c14f7759?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEyfHxnaWZ0JTIwZm9yJTIwbWVufGVufDB8fHx8MTY3ODg5ODg4NA&ixlib=rb-4.0.3&q=80&w=600", products: [ { name: "The Executive", price: "₹2,499", imageUrl: "https://images.unsplash.com/photo-1617192237372-9a72d7336ce0?q=80&w=1887&auto=format&fit=crop" }, { name: "Gourmet Gentleman", price: "₹2,699", imageUrl: "https://images.unsplash.com/photo-1559819423-7a7ce35359df?q=80&w=1887&auto=format&fit=crop" }, { name: "Adventure Kit", price: "₹2,199", imageUrl: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=2070&auto=format&fit=crop" }, ] }, "For Her": { bannerImage: "https://images.unsplash.com/photo-1594035934090-09c313de1194?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDV8fHNwYSUyMGdpZnQlMjBzZXR8ZW58MHx8fHwxNjc4ODk4OTI1&ixlibrb-4.0.3&q=80&w=600", products: [ { name: "Spa Day Retreat", price: "₹2,999", imageUrl: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" }, { name: "The Glamour Box", price: "₹3,499", imageUrl: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=2080&auto=format&fit=crop" }, { name: "Sweet Serenity", price: "₹2,799", imageUrl: "https://images.unsplash.com/photo-1620052298288-c4a45a3a25b8?q=80&w=1887&auto=format&fit=crop" }, ] }, "For Kids": { bannerImage: "https://images.unsplash.com/photo-1566576912317-15635208114f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEwfHxraWRzJTIwZ2lmdCUyMGJhc2tldHxlbnwwfHx8fDE2Nzg4OTg5NjY&ixlib-rb-4.0.3&q=80&w=600", products: [ { name: "Creative Explorer", price: "₹1,999", imageUrl: "https://images.unsplash.com/photo-1516627145408-4d538a7c206a?q=80&w=2070&auto=format&fit=crop" }, { name: "Candy Kingdom", price: "₹1,499", imageUrl: "https://images.unsplash.com/photo-1600719828790-a52da69866e4?q=80&w=1887&auto=format&fit=crop" }, { name: "Toy Trove", price: "₹2,299", imageUrl: "https://images.unsplash.com/photo-1560859252-e1644e590210?q=80&w=1964&auto=format&fit=crop" }, ] }, "Weddings": { bannerImage: "https://images.unsplash.com/photo-1526301828286-9856f68903a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEzfHx3ZWRkaW5nJTIwZ2lmdHxlbnwwfHx8fDE2Nzg4OTkwMDQ&ixlib.rb-4.0.3&q=80&w=600", products: [ { name: "To The Happy Couple", price: "₹4,999", imageUrl: "https://images.unsplash.com/photo-16079
 

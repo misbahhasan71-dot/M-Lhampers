@@ -17,9 +17,10 @@
             font-family: 'Playfair Display', serif;
         }
         .hero-bg {
-            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1549465228-348f9fecc7a1?q=80&w=2070&auto=format&fit=crop');
+            background-image: linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.1)), url('https://images.unsplash.com/photo-1604164372215-2a2245224716?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
+            transition: background-image 0.5s ease-in-out;
         }
         .card-hover-effect {
             transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -28,10 +29,12 @@
             transform: translateY(-10px);
             box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
         }
-        /* Loading Spinner */
+        .hero-text-shadow {
+            text-shadow: 2px 2px 8px rgba(217, 119, 6, 0.5);
+        }
         .loader {
-            border: 5px solid #f3f3f3; /* Light grey */
-            border-top: 5px solid #a87c5b; /* Amber */
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #a87c5b;
             border-radius: 50%;
             width: 50px;
             height: 50px;
@@ -71,38 +74,31 @@
     <!-- Hero Section -->
     <section id="home" class="hero-bg text-white h-[80vh] flex items-center">
         <div class="container mx-auto px-6 text-center">
-            <h1 class="text-4xl md:text-7xl font-playfair font-bold mb-4 leading-tight">Gifting, Reimagined.</h1>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8">Discover beautifully curated hampers that tell a story and create lasting memories.</p>
-            <a href="#hampers" class="bg-amber-700 hover:bg-amber-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 text-lg">Explore Our Collections</a>
+            <h1 id="hero-title" class="text-4xl md:text-7xl font-playfair font-bold mb-4 leading-tight hero-text-shadow">Gifting, Reimagined.</h1>
+            <p id="hero-subtitle" class="text-lg md:text-xl max-w-3xl mx-auto mb-8">Discover beautifully curated hampers that tell a story and create lasting memories.</p>
+            <a id="hero-button" href="#hampers" class="bg-amber-700 hover:bg-amber-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 text-lg">Explore Our Collections</a>
         </div>
     </section>
 
     <!-- Hampers Showcase -->
     <section id="hampers" class="py-20 bg-stone-50">
         <div class="container mx-auto px-6">
-            <!-- This container shows the main collection banners -->
             <div id="collections-container">
                 <h2 class="text-4xl font-playfair text-center font-bold text-amber-800 mb-12">Our Collections</h2>
                 <div id="collection-grid-loader" class="flex justify-center items-center h-64">
                     <div class="loader"></div>
                 </div>
-                <div id="collection-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 hidden">
-                    <!-- Collection Banners will be dynamically inserted here -->
-                </div>
+                <div id="collection-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 hidden"></div>
             </div>
-
-            <!-- This container is hidden by default and shows products of a selected collection -->
             <div id="products-container" class="hidden">
                 <div class="flex justify-between items-center mb-12 flex-wrap gap-4">
                      <button id="back-to-collections" class="text-amber-800 hover:text-amber-600 font-semibold order-1">
                         <i class="fas fa-arrow-left mr-2"></i> Back to Collections
                     </button>
                     <h2 id="product-collection-title" class="text-4xl font-playfair text-center font-bold text-amber-800 order-2 flex-grow"></h2>
-                    <div class="w-24 order-3"></div> <!-- Spacer -->
+                    <div class="w-24 order-3"></div>
                 </div>
-                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <!-- Products will be dynamically inserted here -->
-                </div>
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"></div>
             </div>
         </div>
     </section>
@@ -178,10 +174,7 @@
     <footer class="bg-gray-800 text-white py-10">
         <div class="container mx-auto px-6 text-center">
             <p>&copy; 2024 M&L Hampers. All Rights Reserved.</p>
-            <p class="mt-2">Designed with <i class="fas fa-heart text-red-500"></i></p>
-            <div class="mt-4">
-                <a href="#" id="adminLoginLink" class="text-sm text-gray-400 hover:text-white">Admin Access</a>
-            </div>
+            <p class="mt-2">Designed with <button id="secretAdminLogin" class="bg-transparent border-none p-0"><i class="fas fa-heart text-red-500 hover:text-red-400 transition-colors"></i></button></p>
         </div>
     </footer>
 
@@ -218,8 +211,39 @@
                 </div>
             </div>
 
+            <!-- Manage Hero Section -->
+             <div class="bg-stone-50 p-6 rounded-lg mt-6 border-t-4 border-purple-700">
+                <h3 class="font-bold text-2xl mb-4 text-gray-800">Manage Hero Content</h3>
+                <div id="hero-success-message" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+                    <strong class="font-bold">Success!</strong>
+                    <span class="block sm:inline">Hero content updated.</span>
+                </div>
+                <form id="manageHeroForm">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+                        <div>
+                            <label for="heroTitleInput" class="block text-sm font-medium text-gray-700">Main Title</label>
+                            <input type="text" id="heroTitleInput" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                            
+                            <label for="heroSubtitleInput" class="block text-sm font-medium text-gray-700 mt-4">Subtitle</label>
+                            <textarea id="heroSubtitleInput" rows="3" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm"></textarea>
+                            
+                            <label for="heroButtonInput" class="block text-sm font-medium text-gray-700 mt-4">Button Text</label>
+                            <input type="text" id="heroButtonInput" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Background Image</label>
+                            <img id="heroImagePreview" src="" class="mt-1 w-full h-32 object-cover rounded-md border bg-gray-200">
+                            <label for="heroImageInput" class="block text-sm font-medium text-gray-700 mt-2">Upload New Image</label>
+                            <input type="file" id="heroImageInput" accept="image/*" class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-amber-100 file:text-amber-800 hover:file:bg-amber-200">
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-4 w-full md:w-auto bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-md">Save Hero Changes</button>
+                </form>
+            </div>
+
+
             <!-- Create Collection Section -->
-            <div class="bg-stone-50 p-6 rounded-lg mt-6 border-t-4 border-green-700">
+            <div class="bg-stone-50 p-6 rounded-lg mt-8 border-t-4 border-green-700">
                 <h3 class="font-bold text-2xl mb-4 text-gray-800">Create New Collection</h3>
                 <div id="collection-success-message" class="hidden bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
                     <strong class="font-bold">Success!</strong>
@@ -430,14 +454,9 @@
     
     <!-- START FIREBASE INTEGRATION -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, onSnapshot, doc, getDoc, setDoc, updateDoc, deleteDoc, writeBatch, getDocs, addDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // ************************************************************************************
-        // Placeholder Firebase project configuration. 
-        // REPLACE THIS with your actual Firebase config to make your live website work.
-        // ************************************************************************************
         const firebaseConfig = {
             apiKey: "AIzaSyCHB-tBbDR-r1k_yOMt_p3b_p3-b_Z-tDc",
             authDomain: "ml-hampers-website.firebaseapp.com",
@@ -447,17 +466,10 @@
             appId: "1:955835509550:web:1234abcd5678efgh1234ij"
         };
         
-        // --- GLOBAL VARIABLES & DOM ELEMENTS ---
         let collectionsData = {};
+        let heroData = {};
         const collectionGridLoader = document.getElementById('collection-grid-loader');
 
-        // Check for placeholder config and show warning if needed
-        if (firebaseConfig.apiKey === "AIzaSyCHB-tBbDR-r1k_yOMt_p3b_p3-b_Z-tDc") {
-             // We keep this check but remove the visual warning as requested
-             console.warn("Using placeholder Firebase credentials. Please replace them for your live website.")
-        }
-
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
@@ -481,12 +493,7 @@
                 const message = contactForm.querySelector('textarea').value;
                 
                 try {
-                    await addDoc(collection(db, "messages"), {
-                        name: name,
-                        email: email,
-                        message: message,
-                        timestamp: new Date()
-                    });
+                    await addDoc(collection(db, "messages"), { name, email, message, timestamp: new Date() });
                     successModal.classList.remove('hidden');
                     contactForm.reset();
                 } catch (error) {
@@ -513,13 +520,10 @@
                     collectionGrid.classList.add('hidden');
                     return;
                 }
-
                 collectionGridLoader.classList.add('hidden');
                 collectionGrid.classList.remove('hidden');
                 collectionGrid.innerHTML = '';
-                
                 const sortedCollectionNames = Object.keys(collectionsData).sort();
-
                 for (const collectionName of sortedCollectionNames) {
                     const collection = collectionsData[collectionName];
                     const bannerCard = `
@@ -530,11 +534,9 @@
                                     <h3 class="text-3xl font-playfair font-bold text-white text-center">${collectionName}</h3>
                                 </div>
                             </div>
-                        </div>
-                    `;
+                        </div>`;
                     collectionGrid.innerHTML += bannerCard;
                 }
-                
                 document.querySelectorAll('#collection-grid .card-hover-effect').forEach(card => {
                     card.addEventListener('click', () => {
                         const collectionName = card.dataset.collection;
@@ -556,12 +558,10 @@
                     productGrid.innerHTML = `<p class="text-center text-gray-500 col-span-full">No products in this collection yet.</p>`;
                     return;
                 }
-
                 products.forEach(product => {
                     const whatsappNumber = '918948581236';
                     const message = encodeURIComponent(`Hello M&L Hampers, I'm interested in the "${product.name}" hamper from the ${collectionName} collection.`);
                     const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
-
                     const productCard = `
                         <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover-effect flex flex-col">
                             <img src="${product.imageUrl}" alt="${product.name}" class="w-full h-64 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/a87c5b/ffffff?text=Image+Not+Found';">
@@ -574,8 +574,7 @@
                                     <i class="fab fa-whatsapp mr-2"></i> Inquire Now
                                 </a>
                             </div>
-                        </div>
-                    `;
+                        </div>`;
                     productGrid.innerHTML += productCard;
                 });
             }
@@ -585,8 +584,7 @@
                 collectionsContainer.classList.remove('hidden');
             });
 
-            // --- Admin Panel Logic ---
-            const adminLoginLink = document.getElementById('adminLoginLink');
+            const adminLoginLink = document.getElementById('secretAdminLogin');
             const adminModal = document.getElementById('adminModal');
             const closeModal = document.getElementById('closeModal');
             const adminLoginForm = document.getElementById('adminLoginForm');
@@ -594,7 +592,6 @@
             const logoutButton = document.getElementById('logoutButton');
             const loginError = document.getElementById('login-error');
             
-            // Forms and messages
             const createCollectionForm = document.getElementById('createCollectionForm');
             const collectionSuccessMessage = document.getElementById('collection-success-message');
             const collectionErrorMessage = document.getElementById('collection-error-message');
@@ -606,33 +603,29 @@
             const removeProductForm = document.getElementById('removeProductForm');
             const removeProductSuccessMessage = document.getElementById('remove-product-success-message');
             const editProductSuccessMessage = document.getElementById('edit-product-success-message');
+            const manageHeroForm = document.getElementById('manageHeroForm');
+            const heroSuccessMessage = document.getElementById('hero-success-message');
 
-            // Select dropdowns
             const productCollectionSelect = document.getElementById('productCollection');
             const bannerCollectionSelect = document.getElementById('bannerCollectionSelect');
             const removeProductCollectionSelect = document.getElementById('removeProductCollectionSelect');
             const productToRemoveSelect = document.getElementById('productToRemoveSelect');
             const manageCollectionSelect = document.getElementById('manageCollectionSelect');
             
-            // Search inputs
             const searchProductToRemoveInput = document.getElementById('searchProductToRemove');
             const searchProductToManageInput = document.getElementById('searchProductToManage');
 
-            // Product Management
             const productListContainer = document.getElementById('productListContainer');
 
-            // Edit Modal
             const editProductModal = document.getElementById('editProductModal');
             const editProductForm = document.getElementById('editProductForm');
             const closeEditModal = document.getElementById('closeEditModal');
 
-            // Messages Modal
             const viewMessagesBtn = document.getElementById('viewMessagesBtn');
             const messagesModal = document.getElementById('messagesModal');
             const closeMessagesModal = document.getElementById('closeMessagesModal');
             const messageListContainer = document.getElementById('messageListContainer');
 
-            // Reset
             const resetDataButton = document.getElementById('resetDataButton');
             const resetConfirmModal = document.getElementById('resetConfirmModal');
             const cancelReset = document.getElementById('cancelReset');
@@ -642,20 +635,16 @@
                 productListContainer.innerHTML = '';
                 const collection = collectionsData[collectionName];
                 const products = collection ? collection.products : [];
-                
                 if (!products || products.length === 0) {
-                    productListContainer.innerHTML = `<p class="text-center text-gray-500 p-4">No products in this collection.</p>`;
+                    productListContainer.innerHTML = `<p class="text-center text-gray-500 p-4">No products.</p>`;
                     return;
                 }
-
                 const lowerCaseSearchTerm = searchTerm.toLowerCase();
                 const filteredProducts = products.filter(p => p.name.toLowerCase().includes(lowerCaseSearchTerm));
-                
                 if (filteredProducts.length === 0) {
-                    productListContainer.innerHTML = `<p class="text-center text-gray-500 p-4">No matching products found.</p>`;
+                    productListContainer.innerHTML = `<p class="text-center text-gray-500 p-4">No matching products.</p>`;
                     return;
                 }
-                
                 filteredProducts.forEach(product => {
                     const productIndex = products.indexOf(product);
                     const productElement = document.createElement('div');
@@ -678,68 +667,54 @@
                 productToRemoveSelect.innerHTML = '';
                 const collection = collectionsData[collectionName];
                 const products = collection ? collection.products : [];
-                
                 if (!products || products.length === 0) {
-                    const option = document.createElement('option');
-                    option.textContent = "No products in this collection";
-                    option.disabled = true;
-                    productToRemoveSelect.appendChild(option);
+                    productToRemoveSelect.innerHTML = `<option disabled>No products in this collection</option>`;
                     return;
                 }
-
                 const lowerCaseSearchTerm = searchTerm.toLowerCase();
                 const filteredProducts = products
-                    .map((product, index) => ({ ...product, originalIndex: index }))
-                    .filter(product => product.name.toLowerCase().includes(lowerCaseSearchTerm));
-
+                    .map((p, i) => ({ ...p, originalIndex: i }))
+                    .filter(p => p.name.toLowerCase().includes(lowerCaseSearchTerm));
                 if (filteredProducts.length === 0) {
-                    const option = document.createElement('option');
-                    option.textContent = "No matching products found";
-                    option.disabled = true;
-                    productToRemoveSelect.appendChild(option);
+                    productToRemoveSelect.innerHTML = `<option disabled>No matching products found</option>`;
                     return;
                 }
-
-                filteredProducts.forEach(product => {
-                    const option = document.createElement('option');
-                    option.value = product.originalIndex;
-                    option.textContent = product.name;
-                    productToRemoveSelect.appendChild(option);
+                filteredProducts.forEach(p => {
+                    productToRemoveSelect.innerHTML += `<option value="${p.originalIndex}">${p.name}</option>`;
                 });
             }
             
             function populateCollectionSelects() {
-                productCollectionSelect.innerHTML = '';
-                bannerCollectionSelect.innerHTML = '';
-                removeProductCollectionSelect.innerHTML = '';
-                manageCollectionSelect.innerHTML = '';
+                const selects = [productCollectionSelect, bannerCollectionSelect, removeProductCollectionSelect, manageCollectionSelect];
+                selects.forEach(s => s.innerHTML = '');
                 const sortedCollectionNames = Object.keys(collectionsData).sort();
                 for (const collectionName of sortedCollectionNames) {
-                    const option = document.createElement('option');
-                    option.value = collectionName;
-                    option.textContent = collectionName;
-                    productCollectionSelect.appendChild(option.cloneNode(true));
-                    bannerCollectionSelect.appendChild(option.cloneNode(true));
-                    removeProductCollectionSelect.appendChild(option.cloneNode(true));
-                    manageCollectionSelect.appendChild(option.cloneNode(true));
+                    selects.forEach(s => s.innerHTML += `<option value="${collectionName}">${collectionName}</option>`);
                 }
+            }
+            
+            function populateHeroAdminForm() {
+                document.getElementById('heroTitleInput').value = heroData.title || '';
+                document.getElementById('heroSubtitleInput').value = heroData.subtitle || '';
+                document.getElementById('heroButtonInput').value = heroData.buttonText || '';
+                document.getElementById('heroImagePreview').src = heroData.backgroundImageUrl || '';
             }
 
             adminLoginLink.addEventListener('click', e => { e.preventDefault(); adminModal.classList.remove('hidden'); });
             closeModal.addEventListener('click', () => { adminModal.classList.add('hidden'); loginError.classList.add('hidden'); adminLoginForm.reset(); });
-            adminModal.addEventListener('click', e => { if (e.target === adminModal) { closeModal.click(); } });
+            adminModal.addEventListener('click', e => { if (e.target === adminModal) closeModal.click(); });
 
             adminLoginForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
-
                 if (username === '95583550' && password === 'Misbah&hamper#ML') {
                     adminModal.classList.add('hidden');
                     adminPanel.classList.remove('hidden');
                     adminLoginForm.reset();
                     loginError.classList.add('hidden');
                     populateCollectionSelects();
+                    populateHeroAdminForm();
                     const firstCollection = Object.keys(collectionsData)[0];
                     if(firstCollection) {
                         populateProductsToRemoveSelect(firstCollection);
@@ -751,54 +726,83 @@
                 }
             });
 
+            manageHeroForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const button = e.submitter;
+                button.disabled = true; button.textContent = 'Saving...';
+
+                const newTitle = document.getElementById('heroTitleInput').value;
+                const newSubtitle = document.getElementById('heroSubtitleInput').value;
+                const newButtonText = document.getElementById('heroButtonInput').value;
+                const newImageFile = document.getElementById('heroImageInput').files[0];
+
+                let dataToUpdate = {
+                    title: newTitle,
+                    subtitle: newSubtitle,
+                    buttonText: newButtonText
+                };
+                
+                const saveToDb = async () => {
+                    try {
+                        await setDoc(doc(db, "siteContent", "hero"), dataToUpdate, { merge: true });
+                        heroSuccessMessage.classList.remove('hidden');
+                        setTimeout(() => heroSuccessMessage.classList.add('hidden'), 4000);
+                    } catch (error) {
+                        console.error("Error saving hero content:", error);
+                        alert("Failed to save hero content.");
+                    } finally {
+                        button.disabled = false; button.textContent = 'Save Hero Changes';
+                    }
+                };
+
+                if (newImageFile) {
+                    const reader = new FileReader();
+                    reader.onload = async (event) => {
+                        dataToUpdate.backgroundImageUrl = event.target.result;
+                        await saveToDb();
+                    };
+                    reader.readAsDataURL(newImageFile);
+                } else {
+                    await saveToDb();
+                }
+            });
+
             createCollectionForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const button = e.submitter;
-                button.disabled = true;
-                button.textContent = 'Creating...';
-
-                const collectionNameInput = document.getElementById('newCollectionName');
-                const collectionName = collectionNameInput.value.trim();
+                button.disabled = true; button.textContent = 'Creating...';
+                const collectionName = document.getElementById('newCollectionName').value.trim();
                 const bannerFile = document.getElementById('newCollectionBannerImage').files[0];
 
                 if (!collectionName || !bannerFile) {
                     collectionErrorText.textContent = "Please provide a name and a banner image.";
                     collectionErrorMessage.classList.remove('hidden');
                     setTimeout(() => collectionErrorMessage.classList.add('hidden'), 4000);
-                    button.disabled = false;
-                    button.textContent = 'Create Collection';
+                    button.disabled = false; button.textContent = 'Create Collection';
                     return;
                 }
-
                 if (collectionsData[collectionName]) {
                     collectionErrorText.textContent = "A collection with this name already exists.";
                     collectionErrorMessage.classList.remove('hidden');
                     setTimeout(() => collectionErrorMessage.classList.add('hidden'), 4000);
-                    button.disabled = false;
-                    button.textContent = 'Create Collection';
+                    button.disabled = false; button.textContent = 'Create Collection';
                     return;
                 }
-
                 const reader = new FileReader();
                 reader.onload = async (event) => {
-                    const newCollection = {
-                        bannerImage: event.target.result,
-                        products: []
-                    };
+                    const newCollection = { bannerImage: event.target.result, products: [] };
                     try {
-                        const collectionRef = doc(db, 'collections', collectionName);
-                        await setDoc(collectionRef, newCollection);
+                        await setDoc(doc(db, 'collections', collectionName), newCollection);
                         createCollectionForm.reset();
                         collectionSuccessMessage.classList.remove('hidden');
                         setTimeout(() => collectionSuccessMessage.classList.add('hidden'), 4000);
                     } catch (error) {
                         console.error("Error creating collection:", error);
-                        collectionErrorText.textContent = "Failed to create collection. See console for details.";
+                        collectionErrorText.textContent = "Failed to create collection.";
                         collectionErrorMessage.classList.remove('hidden');
                         setTimeout(() => collectionErrorMessage.classList.add('hidden'), 4000);
                     } finally {
-                        button.disabled = false;
-                        button.textContent = 'Create Collection';
+                        button.disabled = false; button.textContent = 'Create Collection';
                     }
                 };
                 reader.readAsDataURL(bannerFile);
@@ -806,72 +810,60 @@
             
             addProductForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
+                const button = e.submitter;
+                button.disabled = true; button.textContent = 'Adding...';
                 const collectionName = productCollectionSelect.value;
                 const productName = document.getElementById('productName').value;
                 const productPrice = document.getElementById('productPrice').value;
                 const productImageFile = document.getElementById('productImage').files[0];
-                const button = e.submitter;
-                button.disabled = true;
-                button.textContent = 'Adding...';
-
                 if (collectionName && productName && productPrice && productImageFile) {
                     const reader = new FileReader();
                     reader.onload = async function(event) {
                         const newProduct = { name: productName, price: productPrice, imageUrl: event.target.result };
                         const currentProducts = collectionsData[collectionName]?.products || [];
                         const updatedProducts = [...currentProducts, newProduct];
-                        
                         try {
-                            const collectionRef = doc(db, 'collections', collectionName);
-                            await updateDoc(collectionRef, { products: updatedProducts });
-                            
+                            await updateDoc(doc(db, 'collections', collectionName), { products: updatedProducts });
                             addProductForm.reset();
                             productSuccessMessage.classList.remove('hidden');
                             setTimeout(() => productSuccessMessage.classList.add('hidden'), 4000);
                         } catch (error) {
                             console.error("Error adding product: ", error);
-                            alert("Failed to add product. See console for details.");
+                            alert("Failed to add product.");
                         } finally {
-                            button.disabled = false;
-                            button.textContent = 'Add Product';
+                            button.disabled = false; button.textContent = 'Add Product';
                         }
                     };
                     reader.readAsDataURL(productImageFile);
                 } else {
-                     button.disabled = false;
-                     button.textContent = 'Add Product';
+                     button.disabled = false; button.textContent = 'Add Product';
                 }
             });
             
             updateBannerForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
+                const button = e.submitter;
+                button.disabled = true; button.textContent = 'Updating...';
                 const collectionName = bannerCollectionSelect.value;
                 const bannerImageFile = document.getElementById('collectionBannerImage').files[0];
-                const button = e.submitter;
-                button.disabled = true;
-                button.textContent = 'Updating...';
-
                 if (collectionName && bannerImageFile) {
                     const reader = new FileReader();
                     reader.onload = async function(event) {
                         try {
-                            const collectionRef = doc(db, 'collections', collectionName);
-                            await updateDoc(collectionRef, { bannerImage: event.target.result });
+                            await updateDoc(doc(db, 'collections', collectionName), { bannerImage: event.target.result });
                             updateBannerForm.reset();
                             bannerSuccessMessage.classList.remove('hidden');
                             setTimeout(() => bannerSuccessMessage.classList.add('hidden'), 4000);
                         } catch (error) {
                             console.error("Error updating banner: ", error);
-                            alert("Failed to update banner. See console for details.");
+                            alert("Failed to update banner.");
                         } finally {
-                             button.disabled = false;
-                            button.textContent = 'Update Banner';
+                             button.disabled = false; button.textContent = 'Update Banner';
                         }
                     };
                     reader.readAsDataURL(bannerImageFile);
                 } else {
-                    button.disabled = false;
-                    button.textContent = 'Update Banner';
+                    button.disabled = false; button.textContent = 'Update Banner';
                 }
             });
 
@@ -879,56 +871,45 @@
                 searchProductToRemoveInput.value = '';
                 populateProductsToRemoveSelect(e.target.value);
             });
-
             searchProductToRemoveInput.addEventListener('input', () => {
-                const collectionName = removeProductCollectionSelect.value;
-                populateProductsToRemoveSelect(collectionName, searchProductToRemoveInput.value);
+                populateProductsToRemoveSelect(removeProductCollectionSelect.value, searchProductToRemoveInput.value);
             });
-
             removeProductForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
+                const button = e.submitter;
                 const collectionName = removeProductCollectionSelect.value;
                 const productIndexToRemove = parseInt(productToRemoveSelect.value);
-                const button = e.submitter;
-
                 if (collectionName && !isNaN(productIndexToRemove)) {
-                    button.disabled = true;
-                    button.textContent = 'Removing...';
+                    button.disabled = true; button.textContent = 'Removing...';
                     const currentProducts = collectionsData[collectionName]?.products || [];
                     const updatedProducts = currentProducts.filter((_, index) => index !== productIndexToRemove);
-                    
                     try {
-                        const collectionRef = doc(db, 'collections', collectionName);
-                        await updateDoc(collectionRef, { products: updatedProducts });
+                        await updateDoc(doc(db, 'collections', collectionName), { products: updatedProducts });
                         searchProductToRemoveInput.value = '';
                         removeProductSuccessMessage.classList.remove('hidden');
                         setTimeout(() => removeProductSuccessMessage.classList.add('hidden'), 4000);
                     } catch (error) {
                         console.error("Error removing product: ", error);
-                        alert("Failed to remove product. See console for details.");
+                        alert("Failed to remove product.");
                     } finally {
-                        button.disabled = false;
-                        button.textContent = 'Remove Product';
+                        button.disabled = false; button.textContent = 'Remove Product';
                     }
                 }
             });
             
-            // Manage/Edit Product Logic
             manageCollectionSelect.addEventListener('change', (e) => {
                 searchProductToManageInput.value = '';
                 populateProductsForManagement(e.target.value);
             });
-
             searchProductToManageInput.addEventListener('input', (e) => {
                 populateProductsForManagement(manageCollectionSelect.value, e.target.value);
             });
-
             productListContainer.addEventListener('click', (e) => {
-                if (e.target.classList.contains('edit-product-btn')) {
-                    const collectionName = e.target.dataset.collection;
-                    const productIndex = parseInt(e.target.dataset.index);
+                const editButton = e.target.closest('.edit-product-btn');
+                if (editButton) {
+                    const collectionName = editButton.dataset.collection;
+                    const productIndex = parseInt(editButton.dataset.index);
                     const product = collectionsData[collectionName].products[productIndex];
-
                     document.getElementById('editProductCollectionName').value = collectionName;
                     document.getElementById('editProductIndex').value = productIndex;
                     document.getElementById('editProductName').value = product.name;
@@ -938,33 +919,23 @@
                     editProductModal.classList.remove('hidden');
                 }
             });
-
-            closeEditModal.addEventListener('click', () => {
-                editProductModal.classList.add('hidden');
-            });
-
+            closeEditModal.addEventListener('click', () => editProductModal.classList.add('hidden'));
             editProductForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const button = e.submitter;
-                button.disabled = true;
-                button.textContent = "Saving...";
-
+                button.disabled = true; button.textContent = "Saving...";
                 const collectionName = document.getElementById('editProductCollectionName').value;
                 const productIndex = parseInt(document.getElementById('editProductIndex').value);
                 const newName = document.getElementById('editProductName').value;
                 const newPrice = document.getElementById('editProductPrice').value;
                 const newImageFile = document.getElementById('editProductImageFile').files[0];
-
                 const productsCopy = [...collectionsData[collectionName].products];
-                const productToUpdate = { ...productsCopy[productIndex] };
-                productToUpdate.name = newName;
-                productToUpdate.price = newPrice;
+                const productToUpdate = { ...productsCopy[productIndex], name: newName, price: newPrice };
 
                 const updateFirestore = async (updatedProduct) => {
                     productsCopy[productIndex] = updatedProduct;
                     try {
-                        const collectionRef = doc(db, 'collections', collectionName);
-                        await updateDoc(collectionRef, { products: productsCopy });
+                        await updateDoc(doc(db, 'collections', collectionName), { products: productsCopy });
                         editProductSuccessMessage.classList.remove('hidden');
                         setTimeout(() => editProductSuccessMessage.classList.add('hidden'), 4000);
                         editProductModal.classList.add('hidden');
@@ -972,11 +943,9 @@
                         console.error("Error updating product:", error);
                         alert("Failed to update product.");
                     } finally {
-                        button.disabled = false;
-                        button.textContent = "Save Changes";
+                        button.disabled = false; button.textContent = "Save Changes";
                     }
                 };
-
                 if (newImageFile) {
                     const reader = new FileReader();
                     reader.onload = (event) => {
@@ -989,17 +958,12 @@
                 }
             });
 
-            // Messages Modal Logic
-            viewMessagesBtn.addEventListener('click', () => {
-                messagesModal.classList.remove('hidden');
-            });
-            closeMessagesModal.addEventListener('click', () => {
-                messagesModal.classList.add('hidden');
-            });
-
+            viewMessagesBtn.addEventListener('click', () => messagesModal.classList.remove('hidden'));
+            closeMessagesModal.addEventListener('click', () => messagesModal.classList.add('hidden'));
             messageListContainer.addEventListener('click', async (e) => {
-                if(e.target.classList.contains('delete-message-btn')) {
-                    const messageId = e.target.dataset.id;
+                const deleteButton = e.target.closest('.delete-message-btn');
+                if(deleteButton) {
+                    const messageId = deleteButton.dataset.id;
                     if (confirm('Are you sure you want to delete this message?')) {
                         try {
                             await deleteDoc(doc(db, "messages", messageId));
@@ -1011,26 +975,26 @@
                 }
             });
 
-
             resetDataButton.addEventListener('click', () => resetConfirmModal.classList.remove('hidden'));
             cancelReset.addEventListener('click', () => resetConfirmModal.classList.add('hidden'));
             confirmReset.addEventListener('click', async () => {
                 const button = confirmReset;
-                button.disabled = true;
-                button.textContent = 'Resetting...';
+                button.disabled = true; button.textContent = 'Resetting...';
                 try {
-                    const collectionsSnapshot = await getDocs(collection(db, 'collections'));
+                    const collectionsSnap = await getDocs(collection(db, 'collections'));
+                    const messagesSnap = await getDocs(collection(db, 'messages'));
                     const deleteBatch = writeBatch(db);
-                    collectionsSnapshot.forEach(doc => deleteBatch.delete(doc.ref));
+                    collectionsSnap.forEach(doc => deleteBatch.delete(doc.ref));
+                    messagesSnap.forEach(doc => deleteBatch.delete(doc.ref));
+                    deleteBatch.delete(doc(db, "siteContent", "hero"));
                     await deleteBatch.commit();
                     await initializeDefaultData();
                 } catch(error) {
                     console.error("Error resetting data: ", error);
-                    alert("Failed to reset data. See console for details.");
+                    alert("Failed to reset data.");
                 } finally {
                     resetConfirmModal.classList.add('hidden');
-                    button.disabled = false;
-                    button.textContent = 'Yes, Reset Data';
+                    button.disabled = false; button.textContent = 'Yes, Reset Data';
                 }
             });
 
@@ -1045,43 +1009,46 @@
             });
 
             // --- Real-time Firestore Listeners ---
-            const collectionsRef = collection(db, 'collections');
-            onSnapshot(collectionsRef, async (snapshot) => {
+            onSnapshot(collection(db, 'collections'), async (snapshot) => {
                 if (snapshot.empty) {
-                    console.log("Database is empty. Initializing with default data...");
-                    await initializeDefaultData();
-                    return; 
+                    await initializeDefaultData(); return; 
                 }
-
                 const newCollectionsData = {};
-                snapshot.forEach((doc) => {
-                    newCollectionsData[doc.id] = doc.data();
-                });
-                
+                snapshot.forEach((doc) => newCollectionsData[doc.id] = doc.data());
                 collectionsData = newCollectionsData;
                 renderCollectionBanners();
-                
                 if (!adminPanel.classList.contains('hidden')) {
-                    const currentRemoveCollection = removeProductCollectionSelect.value;
-                    const currentSearchTerm = searchProductToRemoveInput.value;
-                    const currentManageCollection = manageCollectionSelect.value;
-                    const currentManageSearch = searchProductToManageInput.value;
-                    
+                    const vals = {
+                        removeCol: removeProductCollectionSelect.value,
+                        removeSearch: searchProductToRemoveInput.value,
+                        manageCol: manageCollectionSelect.value,
+                        manageSearch: searchProductToManageInput.value,
+                    };
                     populateCollectionSelects();
-
-                    if(currentRemoveCollection) {
-                        removeProductCollectionSelect.value = currentRemoveCollection;
-                        populateProductsToRemoveSelect(currentRemoveCollection, currentSearchTerm);
+                    if(vals.removeCol) {
+                        removeProductCollectionSelect.value = vals.removeCol;
+                        populateProductsToRemoveSelect(vals.removeCol, vals.removeSearch);
                     }
-                    if(currentManageCollection) {
-                        manageCollectionSelect.value = currentManageCollection;
-                        populateProductsForManagement(currentManageCollection, currentManageSearch);
+                    if(vals.manageCol) {
+                        manageCollectionSelect.value = vals.manageCol;
+                        populateProductsForManagement(vals.manageCol, vals.manageSearch);
                     }
                 }
             });
-
-            const messagesQuery = query(collection(db, "messages"), orderBy("timestamp", "desc"));
-            onSnapshot(messagesQuery, (snapshot) => {
+            onSnapshot(doc(db, "siteContent", "hero"), async (docSnap) => {
+                if (!docSnap.exists()) {
+                     await initializeDefaultData(); return;
+                }
+                heroData = docSnap.data();
+                document.getElementById('hero-title').textContent = heroData.title;
+                document.getElementById('hero-subtitle').textContent = heroData.subtitle;
+                document.getElementById('hero-button').textContent = heroData.buttonText;
+                document.getElementById('home').style.backgroundImage = `linear-gradient(to top, rgba(0,0,0,0.6), rgba(0,0,0,0.1)), url('${heroData.backgroundImageUrl}')`;
+                if (!adminPanel.classList.contains('hidden')) {
+                    populateHeroAdminForm();
+                }
+            });
+            onSnapshot(query(collection(db, "messages"), orderBy("timestamp", "desc")), (snapshot) => {
                 messageListContainer.innerHTML = '';
                 if (snapshot.empty) {
                     messageListContainer.innerHTML = `<p class="text-center text-gray-500 p-4">No messages yet.</p>`;
@@ -1100,22 +1067,27 @@
                             </div>
                             <button class="delete-message-btn text-red-500 hover:text-red-700" data-id="${doc.id}"><i class="fas fa-trash"></i></button>
                         </div>
-                        <p class="mt-2 text-gray-700">${message.message}</p>
-                    `;
+                        <p class="mt-2 text-gray-700">${message.message}</p>`;
                     messageListContainer.appendChild(messageEl);
                 });
             });
         });
 
         const defaultCollectionsData = { "For Him": { bannerImage: "https://images.unsplash.com/photo-1571395434521-5cc1c14f7759?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEyfHxnaWZ0JTIwZm9yJTIwbWVufGVufDB8fHx8MTY3ODg5ODg4NA&ixlib=rb-4.0.3&q=80&w=600", products: [ { name: "The Executive", price: "₹2,499", imageUrl: "https://images.unsplash.com/photo-1617192237372-9a72d7336ce0?q=80&w=1887&auto=format&fit=crop" }, { name: "Gourmet Gentleman", price: "₹2,699", imageUrl: "https://images.unsplash.com/photo-1559819423-7a7ce35359df?q=80&w=1887&auto=format&fit=crop" }, { name: "Adventure Kit", price: "₹2,199", imageUrl: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?q=80&w=2070&auto=format&fit=crop" }, ] }, "For Her": { bannerImage: "https://images.unsplash.com/photo-1594035934090-09c313de1194?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDV8fHNwYSUyMGdpZnQlMjBzZXR8ZW58MHx8fHwxNjc4ODk4OTI1&ixlibrb-4.0.3&q=80&w=600", products: [ { name: "Spa Day Retreat", price: "₹2,999", imageUrl: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" }, { name: "The Glamour Box", price: "₹3,499", imageUrl: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=2080&auto=format&fit=crop" }, { name: "Sweet Serenity", price: "₹2,799", imageUrl: "https://images.unsplash.com/photo-1620052298288-c4a45a3a25b8?q=80&w=1887&auto=format&fit=crop" }, ] }, "For Kids": { bannerImage: "https://images.unsplash.com/photo-1566576912317-15635208114f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEwfHxraWRzJTIwZ2lmdCUyMGJhc2tldHxlbnwwfHx8fDE2Nzg4OTg5NjY&ixlib=rb-4.0.3&q=80&w=600", products: [ { name: "Creative Explorer", price: "₹1,999", imageUrl: "https://images.unsplash.com/photo-1516627145408-4d538a7c206a?q=80&w=2070&auto=format&fit=crop" }, { name: "Candy Kingdom", price: "₹1,499", imageUrl: "https://images.unsplash.com/photo-1600719828790-a52da69866e4?q=80&w=1887&auto=format&fit=crop" }, { name: "Toy Trove", price: "₹2,299", imageUrl: "https://images.unsplash.com/photo-1560859252-e1644e590210?q=80&w=1964&auto=format&fit=crop" }, ] }, "Weddings": { bannerImage: "https://images.unsplash.com/photo-1526301828286-9856f68903a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEzfHx3ZWRkaW5nJTIwZ2lmdHxlbnwwfHx8fDE2Nzg4OTkwMDQ&ixlib.rb-4.0.3&q=80&w=600", products: [ { name: "To The Happy Couple", price: "₹4,999", imageUrl: "https://images.unsplash.com/photo-1607994695034-7a7615039281?q=80&w=1887&auto=format&fit=crop" }, { name: "Celebration Basket", price: "₹5,999", imageUrl: "https://images.unsplash.com/photo-1594951445585-80f073b22b51?q=80&w=1887&auto=format&fit=crop" }, { name: "Mr. & Mrs. Essentials", price: "₹4,499", imageUrl: "https://images.unsplash.com/photo-1556911073-52527ac402b6?q=80&w=2070&auto=format&fit=crop" }, ] }, "Engagements": { bannerImage: "https://images.unsplash.com/photo-1612178532859-2c9c7b9a5c8c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDR8fHJvbWFudGljJTIwZ2lmdHxlbnwwfHx8fDE2Nzg4OTkwMzg&ixlib.rb-4.0.3&q=80&w=600", products: [ { name: "The Proposal", price: "₹3,999", imageUrl: "https://images.unsplash.com/photo-1598214886343-059032734608?q=80&w=1935&auto=format&fit=crop" }, { name: "Future Mrs.", price: "₹3,499", imageUrl: "https://images.unsplash.com/photo-1620789218698-b6a67a07a53e?q=80&w=1887&auto=format&fit=crop" }, { name: "Love Story Starter", price: "₹3,199", imageUrl: "https://images.unsplash.com/photo-1531701553543-a3d8a77a3433?q=80&w=1887&auto=format&fit=crop" }, ] }, "All Occasions": { bannerImage: "https://images.unsplash.com/photo-1566081024363-3882a836ca4b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjE5OHwwfDF8c2VhcmNofDEwfHxnaWZ0JTIwaGFtcGVyfGVufDB8fHx8MTY3ODg5OTA2NQ&ixlib.rb-4.0.3&q=80&w=600", products: [ { name: "Classic Celebration", price: "₹2,199", imageUrl: "https://images.unsplash.com/photo-1602491595018-b0a23dc86968?q=80&w=1887&auto=format&fit=crop" }, { name: "Thank You Kindly", price: "₹1,899", imageUrl: "https://images.unsplash.com/photo-1593101982592-54c38221655e?q=80&w=1887&auto=format&fit=crop" }, { name: "Birthday Surprise", price: "₹2,499", imageUrl: "https://images.unsplash.com/photo-1576836165620-a8328f526017?q=80&w=1964&auto=format&fit=crop" }, ] }, "Candles": { bannerImage: "https://images.unsplash.com/photo-1594212699903-ec8a64e1f9ee?q=80&w=1887&auto=format&fit=crop", products: [ { name: "Serene Lavender", price: "₹1,299", imageUrl: "https://images.unsplash.com/photo-1600857544256-6254420655ec?q=80&w=1887&auto=format&fit=crop" }, { name: "Vanilla Bean Dream", price: "₹1,199", imageUrl: "https://images.unsplash.com/photo-1614294237583-1459a688d0b2?q=80&w=1887&auto=format&fit=crop" }, { name: "Sandalwood Musk", price: "₹1,499", imageUrl: "https://images.unsplash.com/photo-1617805232938-00278f24025d?q=80&w=1887&auto=format&fit=crop" }, ] } };
+        const defaultHeroData = {
+            title: "Gifting, Reimagined.",
+            subtitle: "Discover beautifully curated hampers that tell a story and create lasting memories.",
+            buttonText: "Explore Our Collections",
+            backgroundImageUrl: "https://images.unsplash.com/photo-1604164372215-2a2245224716?q=80&w=2070&auto=format&fit=crop"
+        };
 
         async function initializeDefaultData() {
             console.log("Initializing database with default data...");
             const batch = writeBatch(db);
             for (const collectionName in defaultCollectionsData) {
-                const collectionRef = doc(db, 'collections', collectionName);
-                batch.set(collectionRef, defaultCollectionsData[collectionName]);
+                batch.set(doc(db, 'collections', collectionName), defaultCollectionsData[collectionName]);
             }
+            batch.set(doc(db, "siteContent", "hero"), defaultHeroData);
             await batch.commit();
             console.log("Default data has been written to the database.");
         }
